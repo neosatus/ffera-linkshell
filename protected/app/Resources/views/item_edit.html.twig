@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block menu %}
+    {% include "adminmenu.html.twig" %}
+{% endblock menu %}
+
+{% block body %}
+
+    <form action="{{ path('update_item', {'item_id': item.id}) }}" method="post">
+        <input type="text" placeholder="Item Name" name="item_name" value="{{ item.itemName }}"><br>
+        <input type="number" placeholder="Price" name="price" value="{{ item.price }}"><br>
+        <input type="number" placeholder="Count" name="count" value="{{ item.count }}"><br>
+        <button type="submit">Update</button>
+    </form>
+
+{% endblock body %}

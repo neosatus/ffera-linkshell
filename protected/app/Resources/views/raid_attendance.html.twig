@@ -1,0 +1,70 @@
+{% extends "base.html.twig" %}
+
+{% block javascript %}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script>
+        $(function()
+        {
+            $("#on_time_attendance, #late_attendance").autocomplete({
+                source: "{{ path("user_autocomplete") }}"
+            });
+        });
+    </script>
+{% endblock javascript %}
+
+{% block menu %}
+    {% include "adminmenu.html.twig" %}
+{% endblock menu %}
+
+{% block body %}
+
+    <b>{{ raid.raidTarget }} ({{ raid.raidDate|date("Y-m-d") }})</b><br>
+    <table id="raid_table">
+        <tr>
+            <td>
+                <table class="main">
+                    <tr>
+                        <th>On Time</th><th></th>
+                    </tr>
+                    <form action="{{ path('add_attendee', {'raid_id': raid.getId, 'type': "on_time"}) }}" method="post">
+                    <tr>
+                        <td><input type="text" id="on_time_attendance" name="on_time_attendance" placeholder="Character" {% if focus == "on_time" %}autofocus{% endif %}></td>
+                        <td><button type="submit">Add Character</button></td>
+                    </tr>
+                    </form>
+                    {% if raid.onTimeAttendees is not empty %}
+                        {% for user in raid.onTimeAttendees %}
+                            <tr>
+                                <td>{{ user.username }}</td>
+                                <td><a href="{{ path("remove_attendee", {"raid_id": raid.id, "user_id": user.id, "type": "on_time"}) }}">Remove</a></td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                </table>
+            </td>
+            <td>
+                <table class="main">
+                    <tr>
+                        <th>Late</th><th></th>
+                    </tr>
+                    <form action="{{ path('add_attendee', {'raid_id': raid.getId, 'type': "late"}) }}" method="post">
+                        <tr>
+                            <td><input type="text" id="late_attendance" name="late_attendance" placeholder="Character" {% if focus == "late" %}autofocus{% endif %}></td>
+                            <td><button type="submit">Add Character</button></td>
+                        </tr>
+                    </form>
+                    {% if raid.lateAttendees is not empty %}
+                        {% for user in raid.lateAttendees %}
+                            <tr>
+                                <td>{{ user.username }}</td>
+                                <td><a href="{{ path("remove_attendee", {"raid_id": raid.id, "user_id": user.id, "type": "late"}) }}">Remove</a></td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                </table>
+            </td>
+        </tr>
+    </table>
+{% endblock body %}

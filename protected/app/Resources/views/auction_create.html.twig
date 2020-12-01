@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block menu %}
+    {% include "adminmenu.html.twig" %}
+{% endblock menu %}
+
+{% block body %}
+
+    <form action="{{ path('init_auction') }}" method="post">
+        <input type="text" placeholder="Item Name" name="item_name"><br>
+        <input type="text" placeholder="Item Req." name="item_req"><br>
+        <input type="number" placeholder="Min Bid" name="min_bid"><br>
+        <button type="submit">Create</button>
+    </form>
+
+{% endblock body %}

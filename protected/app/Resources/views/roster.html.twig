@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{% block menu %}
+    {% include "menu.html.twig" %}
+{% endblock menu %}
+
+{% block body %}
+
+    <table id="raid_table">
+        <tr>
+            <td>
+                <table class="main">
+                    <tr>
+                        <th>Character</th>
+                        <th>Main Jobs</th>
+                        {% if is_granted('ROLE_ADMIN') %}<th>Points</th>{% endif %}
+                    </tr>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.mainJob }}/{{ user.subJob }}</td>
+                            {% if is_granted('ROLE_ADMIN') %}<td>{{ user.points }}</td>{% endif %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </td>
+            <td>
+                <table class="main">
+                    <tr>
+                        <th>Job</th>
+                        <th>Count</th>
+                    </tr>
+                    {% for job, count in jobs %}
+                        <tr>
+                            <td>{{ job }}</td>
+                            <td>{{ count }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </td>
+        </tr>
+    </table>
+
+{% endblock body %}

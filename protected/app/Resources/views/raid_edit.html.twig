@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block menu %}
+    {% include "adminmenu.html.twig" %}
+{% endblock menu %}
+
+{% block body %}
+
+    <form action="{{ path('update_raid', {'raid_id': raid.id}) }}" method="post">
+        <input type="text" placeholder="Raid Target" name="raid_target" value="{{ raid.raidTarget }}"><br>
+        <input type="date" placeholder="Raid Date" name="raid_date" value="{{ raid.raidDate|date("Y-m-d") }}"><br>
+        <button type="submit">Update</button>
+    </form>
+
+{% endblock body %}

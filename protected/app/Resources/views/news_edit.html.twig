@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block menu %}
+    {% include "adminmenu.html.twig" %}
+{% endblock menu %}
+
+{% block body %}
+
+    <form action="{{ path('update_news', {'news_id': news.id}) }}" method="post">
+        <input type="text" placeholder="Title" name="title" value="{{ news.title }}"><br>
+        <textarea rows="10" cols="50" placeholder="News Content" name="content">{{ news.content }}</textarea><br>
+        <button type="submit">Update</button>
+    </form>
+
+{% endblock body %}

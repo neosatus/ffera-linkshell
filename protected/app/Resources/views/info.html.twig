@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% block menu %}
+    {% include "menu.html.twig" %}
+{% endblock menu %}
+
+{% block body %}
+
+    {% for story in news %}
+        <h4>{{ story.title }}</h4>
+        <p>{{ story.content|raw }}</p>
+    {% endfor %}
+
+{% endblock body %}

@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block menu %}
+	<li><a href="{{ path('create_auction') }}">Create Auction</a></li>
+    {% include "adminmenu.html.twig" %}
+{% endblock menu %}
+
+{% block body %}
+
+    {% if auctions is empty %}
+        No auctions found!
+    {% else %}
+        <table class="main">
+            <tr>
+                <th>Item Name</th>
+                <th>Item Req.</th>
+                <th>Min Bid</th>
+            </tr>
+            {% for auction in auctions %}
+                <tr>
+                    <td>{{ auction.itemName }}</td>
+                    <td>{{ auction.itemReq }}</td>
+                    <td>{{ auction.minBid }}</td>
+                    <td><a href="{{ path('bid_history', {'auction_id': auction.id}) }}">Bids</a></td>
+                    <td><a href="{{ path('edit_auction', {'auction_id': auction.id}) }}">Edit Auction</a></td>
+                    <td>{% if auction.isOpen %}<a href="{{ path('end_auction', {'auction_id': auction.id}) }}">End Auction</a>{% endif %}</td></tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+{% endblock body %}

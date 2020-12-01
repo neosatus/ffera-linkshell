@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block menu %}
+	<li><a href="{{ path('create_raid') }}">Create Raid</a></li>
+    {% include "adminmenu.html.twig" %}
+{% endblock menu %}
+
+{% block body %}
+
+    {% if raids is empty %}
+        No raids found!
+    {% else %}
+        <table class="main">
+            <tr>
+                <th>Raid Target</th>
+                <th>Raid Date</th>
+            </tr>
+        {% for raid in raids %}
+            <tr>
+                <td>{{ raid.raidTarget }}</td>
+                <td>{{ raid.raidDate|date("Y-m-d") }}</td>
+                <td><a href="{{ path('manage_attendance', {"raid_id": raid.id}) }}">Manage Attendance</a></td>
+                <td><a href="{{ path('edit_raid', {"raid_id": raid.id}) }}">Edit Raid</a></td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+
+{% endblock body %}

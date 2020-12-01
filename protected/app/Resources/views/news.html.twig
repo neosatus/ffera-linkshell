@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block menu %}
+    <li><a href="{{ path('create_news') }}">Create News</a></li>
+    {% include "adminmenu.html.twig" %}
+{% endblock menu %}
+
+{% block body %}
+
+    {% if news is empty %}
+        No news found.
+    {% else %}
+        {% for story in news %}
+            <b>{{ story.title }}</b> by {{ story.poster.username }} <a href="{{ path('edit_news', {'news_id': story.id}) }}">Edit</a><br>
+            <p>{{ story.content|raw }}</p>
+        {% endfor %}
+    {% endif %}
+
+{% endblock body %}

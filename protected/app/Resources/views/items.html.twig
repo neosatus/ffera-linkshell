@@ -1,0 +1,50 @@
+{% extends "base.html.twig" %}
+
+{% block menu %}
+    <li><a href="{{ path('create_item') }}">Create Item</a></li>
+    {% include "adminmenu.html.twig" %}
+{% endblock menu %}
+
+{% block body %}
+
+    <h4>Items For Sale</h4>
+    {% if items is null or items is empty %}
+        No items found.
+    {% else %}
+        <table class="main">
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Stock</th>
+            </tr>
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.itemName }}</td>
+                    <td>{{ item.price }}</td>
+                    <td>{{ item.count }}</td>
+                    <td><a href="{{ path('edit_item', {'item_id': item.id}) }}">Edit</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+    <h4>Open Orders</h4>
+    {% if orders is null or orders is empty %}
+        No orders found.
+    {% else %}
+        <table class="main">
+            <tr>
+                <th>Item</th>
+                <th>Buyer</th>
+            </tr>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order.item.itemName }}</td>
+                    <td>{{ order.buyer.username }}</td>
+                    <td><a href="{{ path('deliver_order', {'order_id': order.id}) }}">Deliver</a></td>
+                    <td><a href="{{ path('refund_order', {'order_id': order.id}) }}">Refund</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+{% endblock body %}

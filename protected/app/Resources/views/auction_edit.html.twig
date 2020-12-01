@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block menu %}
+    {% include "adminmenu.html.twig" %}
+{% endblock menu %}
+
+{% block body %}
+
+    <form action="{{ path('update_auction', {'auction_id': auction.id}) }}" method="post">
+        <input type="text" placeholder="Item Name" name="item_name" value="{{ auction.itemName }}"><br>
+        <input type="text" placeholder="Item Req." name="item_req" value="{{ auction.itemReq }}"><br>
+        <input type="number" placeholder="Min Bid" name="min_bid" value="{{ auction.minBid }}"><br>
+        <button type="submit">Update</button>
+    </form>
+
+{% endblock body %}

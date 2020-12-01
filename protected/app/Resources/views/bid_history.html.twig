@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block menu %}
+    {% include "adminmenu.html.twig" %}
+{% endblock menu %}
+
+{% block body %}
+
+    <b>{{ auction.itemName }}</b><br>
+    {% if bids is empty %}
+        No bids found!
+    {% else %}
+        <table class="main">
+            <tr>
+                <th>Bidder</th>
+                <th>Bid</th>
+            </tr>
+            {% for bid in bids %}
+                <tr>
+                    <td>{{ bid.bidder }}</td>
+                    <td>{{ bid.bid }}</td>
+                    {% if not auction.isOpen and auction.winningBid is null or (auction.winningBid is not null and bid.id != auction.winningBid.id) %}<td><a href="{{ path('make_winning_bid', {'bid_id': bid.id}) }}">Make Winner</a></td>{% endif %}
+                </tr>
+                </form>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+{% endblock body %}

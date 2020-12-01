@@ -1,0 +1,96 @@
+{% extends "base.html.twig" %}
+
+{% block menu %}
+    {% include "menu.html.twig" %}
+{% endblock menu %}
+
+{% block body %}
+
+    <table id="raid_table">
+        <tr>
+            <td>
+                <h4>{{ news.title }}</h4>
+                {{ news.content|raw }}
+            </td>
+            <td>
+                <h4>HNM Bounties</h4>
+                {% if bounties is empty %}
+                    No active bounties found.
+                {% else %}
+                    <table class="main">
+                        <tr><th>Target</th><th>Points</th></tr>
+                        {% for bounty in bounties %}
+                            <tr><td>{{ bounty.target }}</td><td>{{ bounty.points }}</td></tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+
+
+    <h4>Auctions</h4>
+    You currently have <b>{{ user.points }}</b> points!<br>
+    {% if auctions is empty %}
+        <p>No auctions found.</p>
+    {% else %}
+        <table class="main">
+            <tr>
+                <th>Item Name</th>
+                <th>Item Req.</th>
+                <th>Min Bid</th>
+                <th>Your Bid</th>
+            </tr>
+            {% for auction in auctions %}
+                <form action="{{ path('place_bid', {'auction_id': auction.id}) }}" method="post">
+                    <tr>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <td><a href="{{ path('bid_history', {'auction_id': auction.id}) }}">{{ auction.itemName }}</a></td>
+                        {% else %}
+                            <td>{{ auction.itemName }}</td>
+                        {% endif %}
+
+                        <td>{{ auction.itemReq }}</td>
+                        <td>{{ auction.minBid }}</td>
+                        {% if bids[auction.id] != false %}
+                            <td>{{ bids[auction.id].bid }}</td>
+                            <td><a href="{{ path('undo_bid', {'bid_id': bids[auction.id].id}) }}">Undo Bid</a></td>
+                        {% else %}
+                            <td><input type="number" id="bid" name="bid" placeholder="Bid" width="5"></td>
+                            <td><button type="submit">Place Bid</button></td>
+                        {% endif %}
+                    </tr>
+                </form>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    <h4>Store</h4>
+    You currently have <b>{{ user.points }}</b> points!<br>
+    {% if items is empty %}
+        <p>No items for sale.</p>
+    {% else %}
+        <table class="main">
+            <tr>
+                <th>Item Name</th>
+                <th>Price</th>
+            </tr>
+            {% for item in items %}
+                {% set orderFound = false %}
+                {% set foundOrder = null %}
+                {% for order in orders %}
+                    {% if order.item.id == item.id %}
+                        {% set orderFound = true %}
+                        {% set foundOrder = order %}
+                    {% endif %}
+                {% endfor %}
+                <tr>
+                    <td>{{ item.itemName }}</td>
+                    <td>{{ item.price }}</td>
+                    {% if orderFound == true %}<td><a href="{{ path('cancel_order', {'order_id': foundOrder.id}) }}">Cancel</a></td>{% else %}<td><a href="{{ path('place_order', {'item_id': item.id}) }}">Purchase</a></td>{% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+{% endblock body %}

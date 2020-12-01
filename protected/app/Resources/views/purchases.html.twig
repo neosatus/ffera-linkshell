@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+
+{% block menu %}
+    {% include "menu.html.twig" %}
+{% endblock menu %}
+
+{% block body %}
+
+    <h4>Auction Wins</h4>
+    {% if auctions is empty %}
+        <p>No auctions won yet.</p>
+    {% else %}
+        <table class="main">
+            <tr>
+                <th>Item</th>
+                <th>Bid</th>
+            </tr>
+            {% for auction in auctions %}
+            <tr>
+                <td>{{ auction.itemName }}</td>
+                <td>{{ auction.highBid.bid }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    <h4>Store Purchases</h4>
+    {% if orders is empty %}
+        <p>No items bought yet.</p>
+    {% else %}
+        <table class="main">
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+            </tr>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.item.itemName }}</td>
+                <td>{{ order.item.price }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+{% endblock body %}

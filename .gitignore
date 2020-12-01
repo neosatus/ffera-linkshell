@@ -1,0 +1,4 @@
+protected/vendor/*
+protected/var/*
+protected/composer.phar
+protected/app/config/parameters.yml

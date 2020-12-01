@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block menu %}
+    {% include "adminmenu.html.twig" %}
+{% endblock menu %}
+
+{% block body %}
+
+    <h4>Bounties</h4>
+    <table class="main">
+        <tr>
+            <th>Target</th><th>Points</th><th>Status</th>
+        </tr>
+        <form action="{{ path('add_bounty') }}" method="post">
+            <tr>
+                <td><input type="text" id="target" name="target" placeholder="Target" autofocus></td>
+                <td><input type="number" id="points" name="points" placeholder="Points"></td>
+                <td><button type="submit">Add Bounty</button></td>
+            </tr>
+        </form>
+        {% if bounties is not empty %}
+            {% for bounty in bounties %}
+                <tr>
+                    <td>{{ bounty.target }}</td>
+                    <td>{{ bounty.points }}</td>
+                    <td>{% if bounty.active %}<b>Active</b>{% else %}Inactive{% endif %}</td>
+                    <td><a href="{{ path("toggle_bounty", {"bounty_id": bounty.id}) }}">Toggle</a></td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </table>
+
+{% endblock body %}

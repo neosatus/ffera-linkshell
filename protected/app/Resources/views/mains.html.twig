@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+
+{% block menu %}
+    {% include "menu.html.twig" %}
+{% endblock menu %}
+
+{% block body %}
+
+    <table class="main">
+    <form action="{{ path('update_mains') }}" method="post">
+        <tr>
+            <td>Primary Main:</td>
+            <td>
+                <select name="main_job">
+                    <option></option>
+                    {% for job in jobs %}
+                        <option {% if job == user.mainJob %}selected{% endif %}>{{ job }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Secondary Main:</td>
+            <td>
+                <select name="sub_job">
+                    <option></option>
+                    {% for job in jobs %}
+                        <option {% if job == user.subJob %}selected{% endif %}>{{ job }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button type="submit">Update</button></td>
+        </tr>
+        <tr>
+            <td colspan="2">It costs <b>20</b> points to <b>change</b> mains, <b>40</b> to change both</td>
+        </tr>
+
+    </form>
+    </table>
+{% endblock body %}

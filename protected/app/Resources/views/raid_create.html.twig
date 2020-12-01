@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block menu %}
+    {% include "adminmenu.html.twig" %}
+{% endblock menu %}
+
+{% block body %}
+
+    <form action="{{ path('init_raid') }}" method="post">
+        <input type="text" placeholder="Raid Target" name="raid_target"><br>
+        <input type="date" placeholder="Raid Date" name="raid_date"><br>
+        <button type="submit">Create</button>
+    </form>
+
+{% endblock body %}

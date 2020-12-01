@@ -1,0 +1,294 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body 
+{
+	color: #222;
+	background: #fff;
+	font: 0.8em/1.7em Helvetica, Verdana, sans-serif;
+	margin: 2em 0;
+}
+    
+a 
+{ 
+	color: #228B22;
+	font-weight: bold;
+	text-decoration: none;
+}
+    
+a:hover 
+{ 
+	text-decoration: underline; 
+}
+    
+code 
+{ 
+	background: #F5F5F5; 
+	max-width: 100px; 
+	padding: 2px 6px; 
+	word-wrap: break-word; 
+}
+
+#header
+{
+	position: relative;
+	width: 900px;
+	height: 400px;
+	margin: 0 auto;
+	margin-bottom: 15px;
+	border: 1px solid #282828;
+	box-shadow: 5px 5px 2px #888888;
+}
+
+#header h1 a {
+	color: #d4daaf;
+	font: normal 0.5em/2em Helvetica, Sans-serif;
+}
+
+#banner {
+    width: 100%;
+    height: 100%;
+}
+
+#header h1 a:hover {
+	color: #fefbbf;
+}
+
+ul#menu {
+	display: inline-block;
+	float: right;
+	margin-right: 0px;
+    margin-top: -7px;
+}
+
+ul#menu li {
+	display: inline;
+}
+
+ul#menu a {
+	color: #228B22;
+	font-weight: bold;
+	margin-left: 1em;
+	text-decoration: none;
+}
+
+ul#menu a:hover, ul#menu a.active {
+	text-decoration: underline;
+	/*color: #fefbbf;*/
+}
+    
+#package {
+	position: relative;
+	background: #fff;
+	width: 1100px;
+	text-align: left;
+	border: 1px solid #282828;
+	box-shadow: 5px 5px 2px #888888;
+	margin: 0 auto;
+    vertical-align: top;
+}
+
+#content {
+	/*background: url("../images/border.gif") 0 0 no-repeat;*/
+	padding: 10px;
+	vertical-align: top;
+}
+
+#flash-container 
+{ 
+	position: relative;
+	background: #fff;
+	width: 650px;
+	text-align: left;
+	margin: 0 auto;
+	padding: 5px;
+}
+
+#flash-notice 
+{ 
+	position: relative;
+	background: #fff;
+	width: 600px;
+	text-align: left;
+	border: 1px solid #282828;
+	margin: 0 25px 0 25px;
+	padding: 5px;
+}
+
+#login-table
+{
+	margin: 0 auto 0 auto;
+}
+
+div.part-cont
+{
+	background: white;
+	display: inline-block;
+	margin-left: 5px;
+	margin-right: auto;
+	margin-bottom: 5px;
+	border-radius: 10px;
+	/*box-shadow: 3px 3px 3px 2px #666666;*/
+	text-align: left;
+	border: 1px solid black;
+	width: 550px;
+	/*min-height: 150px;*/
+	font-family: helvetica, arial, sans serif;
+	padding: 15px;
+	overflow: auto;
+	zoom: 1;
+	position: inherit;
+}
+
+div.filter-node
+{
+	background: white;
+	display: inline-block;
+	border: 1px solid #228B22;
+	border-radius: 5px;
+	text-align: center;
+	margin: 0px;
+	padding: 2px;
+}
+
+div.filter-node:hover
+{
+	text-decoration: underline;
+}
+
+/******* Tables *******/
+
+table.main
+{
+    display: inline-block;
+    margin-left: 10px;
+    border-spacing: 0px;
+    border-collapse: collapse;
+}
+
+table.main th, table.main td
+{
+    border: 1px solid black;
+    margin: 0px;
+    padding: 5px;
+}
+
+.centered
+{
+    width: 500px;
+    padding-left: 350px;
+	margin: 0 auto;
+}
+
+#raid_table td
+{
+    vertical-align: top;
+}
+
+#home_table
+{
+    width: 100%;
+}
+
+#home_table td
+{
+    text-align: center;
+    vertical-align: top;
+}
+
+#bid
+{
+    width: 50px;
+}
+
+form
+{
+    display: table-cell;
+}
+    
+/******* Typography *******/
+
+h2 {
+	background: url("../images/hr.gif") 0 100% no-repeat;
+	font: normal 2.2em/1.2em Helvetica;
+	text-transform: uppercase;
+	text-shadow: #f6f5e7 0 0 0;
+	letter-spacing: -1px;
+	padding: 0.3em 30px 0.4em 5px;
+	margin-bottom: 1em;
+}
+
+h3 {
+	color: #424242;
+	background: url("../images/hr.gif") 0 100% no-repeat;
+	font: bold 1em Helvetica, Sans-serif;
+	/*padding: 0 5px;*/
+	padding-bottom: 3px;
+	margin-bottom: 1em;
+}
+
+h4 {
+	padding: 1em 5px 0;
+	text-transform: uppercase;
+	color: #228B22;
+}
+
+p {
+	margin: 0.5em 5px 0.7em;
+}
+
+hr {
+	background: url("../images/icons/glyph.gif") 50% 50% no-repeat;
+	width: 106px;
+	height: 11px;
+	border: none;
+	margin: 2em auto;
+}
+
+code {
+	color: #843c37;
+	font: 0.9em Monaco, "Courier New", Courier, mono;
+}
+
+ul, ol {
+	margin: 0 55px;
+}
+
+ul {
+	list-style: square;
+}
+
+li {
+	margin: 0.5em 0;
+}
+
+
+@media (min-width: 768px) 
+{
+    #wrapper 
+	{ 
+		width: 80%; 
+		margin: 2em auto; 
+	}
+        
+	#icon-book 
+	{ 
+		display: inline-block; 
+	}
+        
+	#status a, #next a 
+	{ 
+		display: block; 
+	}
+
+    @-webkit-keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
+    @keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
+    .sf-toolbar
+	{ 
+		opacity: 0; 
+		-webkit-animation: fade-in 1s .2s forwards; 
+		animation: fade-in 1s .2s forwards;
+	}
+}
