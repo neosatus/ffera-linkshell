@@ -7,8 +7,8 @@ Places of interest:
 
 Backend  
 protected/src/AppBundle/Controller/SiteController.php  
-protected/src/AppBundle/Entity/*.php  
-protected/app/Resources/views/*.html.twig  
+protected/src/AppBundle/Entity/\*.php  
+protected/app/Resources/views/\*.html.twig  
 
 Frontend  
 public/js/functions.js  
