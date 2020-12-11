@@ -1,5 +1,5 @@
 app:
-    resource: "/var/www/html/protected/src/AppBundle/Controller/SiteController.php"
+    resource: "@AppBundle/Controller/SiteController.php"
     type:     annotation
 
 fos_user:
