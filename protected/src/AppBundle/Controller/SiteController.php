@@ -100,8 +100,8 @@ class SiteController extends Controller
      */
     public function editMainsAction(Request $request)
     {
-        $jobs = ["WHM", "BLM", "RDM", "WAR", "THF", "MNK", "BRD", "BST", "DRK", "SMN", "NIN", "SAM", "RNG", "DRG", "PLD", "BLU", "COR", "PUP", "DNC", "SCH"];
         $user = $this->getUser();
+		$jobs = $user->getValidJobs();
         return $this->render("mains.html.twig", ["user" => $user, "jobs" => $jobs]);
     }
 
