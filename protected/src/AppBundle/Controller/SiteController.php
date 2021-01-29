@@ -1,7 +1,7 @@
 <?php
 /*
-	SiteController.php
-	The route controller for the main site.
+    SiteController.php
+    The route controller for the main site.
 */
 
 namespace AppBundle\Controller;
@@ -25,9 +25,9 @@ class SiteController extends Controller
     /**
      * @Route("/", name="home")
      */
-	public function indexAction(Request $request)
-	{
-		$user = $this->getUser();
+    public function indexAction(Request $request)
+    {
+        $user = $this->getUser();
         $auctions = $this->getDoctrine()->getRepository("AppBundle:Auction")->findBy(["open" => true]);
         $bounties = $this->getDoctrine()->getRepository("AppBundle:Bounty")->findBy(["active" => true]);
         $news = $this->getDoctrine()->getRepository("AppBundle:News")->find(2);
@@ -54,7 +54,7 @@ class SiteController extends Controller
             "items" => $items,
             "orders" => $orders
         ]);
-	}
+    }
 
     /**
      * @Route("/bid/{auction_id}", name="place_bid")
@@ -267,14 +267,14 @@ class SiteController extends Controller
 
     /* RAID SECTION */
 
-	/**
-	 * @Route("/raid", name="raid_manager")
-	 */
-	public function raidManagerAction(Request $request)
-	{
-		$raids = $this->getDoctrine()->getRepository("AppBundle:Raid")->findBy([], ["raidDate" => "DESC"]);
-		return $this->render("raids.html.twig", ["raids" => $raids]);
-	}
+    /**
+     * @Route("/raid", name="raid_manager")
+     */
+    public function raidManagerAction(Request $request)
+    {
+        $raids = $this->getDoctrine()->getRepository("AppBundle:Raid")->findBy([], ["raidDate" => "DESC"]);
+        return $this->render("raids.html.twig", ["raids" => $raids]);
+    }
 
     /**
      * @Route("/raid/create", name="create_raid")
@@ -362,14 +362,14 @@ class SiteController extends Controller
 
     /* AUCTION SECTION */
 
-	/**
-	 * @Route("/auction", name="auction_manager")
-	 */
-	public function auctionManagerAction(Request $request)
-	{
-		$auctions = $this->getDoctrine()->getRepository("AppBundle:Auction")->findBy([], ['open' => "DESC"]);
-		return $this->render("auctions.html.twig", ["auctions" => $auctions]);
-	}
+    /**
+     * @Route("/auction", name="auction_manager")
+     */
+    public function auctionManagerAction(Request $request)
+    {
+        $auctions = $this->getDoctrine()->getRepository("AppBundle:Auction")->findBy([], ['open' => "DESC"]);
+        return $this->render("auctions.html.twig", ["auctions" => $auctions]);
+    }
 
     /**
      * @Route("/auction/create", name="create_auction")
@@ -428,9 +428,9 @@ class SiteController extends Controller
         return $this->render("bid_history.html.twig", ["auction" => $auction, "bids" => $bids]);
     }
 
-	/**
-	 * @Route("/auction/end/{auction_id}", name="end_auction")
-	 */
+    /**
+     * @Route("/auction/end/{auction_id}", name="end_auction")
+     */
     public function endAuctionAction(Request $request, $auction_id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -551,27 +551,27 @@ class SiteController extends Controller
     /**
      * @Route("/autocomplete", name="user_autocomplete")
      */
-	public function autocompleteAction(Request $request)
-	{
-		$names = array();
-		$term = trim(strip_tags($request->get('term')));
+    public function autocompleteAction(Request $request)
+    {
+        $names = array();
+        $term = trim(strip_tags($request->get('term')));
 
-		$em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
 
-		$entities = $em->getRepository('AppBundle:User')->createQueryBuilder('u')
-		   ->where('u.username LIKE :name')
-		   ->setParameter('name', $term.'%')
-		   ->getQuery()
-		   ->getResult();
+        $entities = $em->getRepository('AppBundle:User')->createQueryBuilder('u')
+           ->where('u.username LIKE :name')
+           ->setParameter('name', $term.'%')
+           ->getQuery()
+           ->getResult();
 
-		foreach ($entities as $entity)
-		{
-			$names[] = $entity->getUsername();
-		}
+        foreach ($entities as $entity)
+        {
+            $names[] = $entity->getUsername();
+        }
 
-		$response = new JsonResponse();
-		$response->setData($names);
+        $response = new JsonResponse();
+        $response->setData($names);
 
-		return $response;
-	}
+        return $response;
+    }
 }
