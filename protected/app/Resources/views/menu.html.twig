@@ -1,5 +1,5 @@
 {% if user is not defined and is_granted('IS_AUTHENTICATED_ANONYMOUSLY') and not is_granted('ROLE_USER') %}
-	<li><a href="{{ path('fos_user_registration_register') }}">Register</a></li>
+    <li><a href="{{ path('fos_user_registration_register') }}">Register</a></li>
 {% endif %}
 {% if is_granted('ROLE_ADMIN') %}
     <li><a href="{{ path('raid_manager') }}">Admin</a></li>

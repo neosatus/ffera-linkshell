@@ -3,25 +3,25 @@
     <head>
         <meta charset="UTF-8" />
         <title>Rolanberry Brew Company</title>
-		{% block stylesheets %}
+        {% block stylesheets %}
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}" />
-		{% endblock %}
-		{% block javascript %}
-		{% endblock %}
+        {% endblock %}
+        {% block javascript %}
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-		<div id="header">
-			<a href="{{ path('home') }}"><img id="banner" src="{{ asset('/images/banner.jpg') }}"/></a>
-		</div>
-		<div id="package">
-			<div id="content">
-				<ul id="menu">
-					{% block menu %}{% endblock %}
-				</ul>
-				{% block body %}{% endblock %}
-				{% block javascripts %}{% endblock %}
-			</div>
-		</div>
+        <div id="header">
+            <a href="{{ path('home') }}"><img id="banner" src="{{ asset('/images/banner.jpg') }}"/></a>
+        </div>
+        <div id="package">
+            <div id="content">
+                <ul id="menu">
+                    {% block menu %}{% endblock %}
+                </ul>
+                {% block body %}{% endblock %}
+                {% block javascripts %}{% endblock %}
+            </div>
+        </div>
     </body>
 </html>
