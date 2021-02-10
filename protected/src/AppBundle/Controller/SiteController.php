@@ -127,7 +127,7 @@ class SiteController extends Controller
     {
         $jobs = ["WHM" => 0, "BLM" => 0, "RDM" => 0, "WAR" => 0, "THF" => 0, "MNK" => 0, "BRD" => 0, "BST" => 0, "DRK" => 0, "SMN" => 0, "NIN" => 0, "SAM" => 0, "RNG" => 0, "DRG" => 0, "PLD" => 0, "BLU" => 0, "COR" => 0, "PUP" => 0, "DNC" => 0, "SCH" => 0];
         $sort = ['username' => 'ASC'];
-        if ($this->getUser()->hasRole('ROLE_ADMIN') or $this->getUser()->hasRole('ROLE_SUPER_ADMIN')) $sort = ['points' => 'DESC'];
+        if ($this->getUser()->hasRole('ROLE_AUCTION_ADMIN') or $this->getUser()->hasRole('ROLE_SUPER_ADMIN')) $sort = ['points' => 'DESC'];
         $users = $this->getDoctrine()->getRepository("AppBundle:User")->findBy(["visible" => 1], $sort);
         foreach ($users as $user)
         {

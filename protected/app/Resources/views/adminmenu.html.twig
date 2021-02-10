@@ -3,5 +3,7 @@
     <li><a href="{{ path('bounty_manager') }}">Bounty Manager</a></li>
     <li><a href="{{ path('news_manager') }}">News Manager</a></li>
     <li><a href="{{ path('raid_manager') }}">Raid Manager</a></li>
-    <li><a href="{{ path('auction_manager') }}">Auction Manager</a></li>
+{% endif %}
+{% if is_granted('ROLE_AUCTION_ADMIN') %}
+	<li><a href="{{ path('auction_manager') }}">Auction Manager</a></li>
 {% endif %}
