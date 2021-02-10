@@ -42,7 +42,7 @@
             {% for auction in auctions %}
                 <form action="{{ path('place_bid', {'auction_id': auction.id}) }}" method="post">
                     <tr>
-                        {% if is_granted('ROLE_ADMIN') %}
+                        {% if is_granted('ROLE_AUCTION_ADMIN') %}
                             <td><a href="{{ path('bid_history', {'auction_id': auction.id}) }}">{{ auction.itemName }}</a></td>
                         {% else %}
                             <td>{{ auction.itemName }}</td>
