@@ -9,23 +9,31 @@
     <table class="main">
     <form action="{{ path('update_mains') }}" method="post">
         <tr>
-            <td>Primary Main:</td>
+            <td>First Main</td>
             <td>
                 <select name="main_job">
                     <option></option>
                     {% for job in jobs %}
-                        <option {% if job == user.mainJob %}selected{% endif %}>{{ job }}</option>
+						{% if job == user.mainJob %}
+							<option selected="true">{{ job }}</option>
+						{% else %}
+							<option>{{ job }}</option>
+						{% endif %}
                     {% endfor %}
                 </select>
             </td>
         </tr>
         <tr>
-            <td>Secondary Main:</td>
+            <td>Second Main</td>
             <td>
                 <select name="sub_job">
                     <option></option>
                     {% for job in jobs %}
-                        <option {% if job == user.subJob %}selected{% endif %}>{{ job }}</option>
+						{% if job == user.subJob %}
+							<option selected="true">{{ job }}</option>
+						{% else %}
+							<option>{{ job }}</option>
+						{% endif %}
                     {% endfor %}
                 </select>
             </td>

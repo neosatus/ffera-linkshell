@@ -38,12 +38,19 @@ class User extends BaseUser
      * @ORM\Column(type="boolean")
      */
     protected $visible = 1;
+	
+	protected $validJobs = ["WHM", "BLM", "RDM", "WAR", "THF", "MNK", "BRD", "BST", "DRK", "SMN", "NIN", "SAM", "RNG", "DRG", "PLD", "BLU", "COR", "PUP", "DNC", "SCH"];
 
     public function __construct()
     {
         parent::__construct();
         $this->visible = 1;
     }
+	
+	public function getValidJobs((
+	{
+		return $this->validJobs;
+	}
 
     public function getPoints()
     {
@@ -82,50 +89,35 @@ class User extends BaseUser
 
     public function updateJobs($mainJob, $subJob)
     {
-        // Do all the return checks
-        if ($this->mainJob <> null and $this->mainJob == $mainJob and $this->subJob <> null and $this->subJob == $subJob) return;
-        if ($mainJob == $subJob) return;
-        
-        // Do the free change checks
-        if ($this->mainJob <> null and $this->mainJob == $subJob and $this->subJob <> null and $this->subJob == $mainJob)
-        {
-            $this->mainJob = $mainJob;
-            $this->subJob = $subJob;
-            return;
-        }
-        if ($this->mainJob <> null and $this->subJob == null and $this->mainJob <> $mainJob and $subJob == null)
-        {
-            $this->subJob = $mainJob;
-            return;
-        }
-        if ($this->mainJob == null and $this->subJob <> null and $mainJob == null and $this->subJob <> $subJob)
-        {
-            $this->mainJob = $subJob;
-            return;
-        }
-        if ($this->mainJob == null or $this->subJob == null)
-        {
-            $this->mainJob = $mainJob;
-            $this->subJob = $subJob;
-            return;
-        }
-
-        // Do the paid changes
-        if ($this->mainJob <> $mainJob and $this->subJob <> $subJob)
-        {
-            if ($this->getPoints() < 40) return;
-            $this->removePoints(40);
-        }
-        else
-        {
-            if ($this->getPoints() < 20) return;
-            $this->removePoints(20);
-        }
-
-        $this->mainJob = $mainJob;
-        $this->subJob = $subJob;
-        return;
+		// Check return cases
+		if ($mainJob == $subJob) return;
+		
+		// Allow swapping
+		if ($this->mainJob == $subJob and $this->subJob == $mainJob)
+		{
+			$this->mainJob = $mainJob;
+			$this->subJob = $subJob;
+			return;
+		}
+		
+		$this->mainJob = $this->processJobUpdate($this->mainJob, $mainJob);
+		$this->subJob = $this->processJobUpdate($this->subJob, $subJob);
     }
+	
+	protected function processJobUpdate($oldJob, $newJob)
+	{
+		// Check if it's actually changing (can't change to blank)
+		if (empty($newJob) or $oldJob == $newJob) return $oldJob;
+		
+		// If it was already set, it costs 20 points
+		if (!empty($oldJob))
+		{
+			if ($this->getPoints() < 20) return $oldJob;
+            $this->removePoints(20);
+		}
+		
+		return $newJob;
+	}
     
     public function getVisibility()
     {
